@@ -7,6 +7,7 @@ router = APIRouter()
 @router.post('/create')
 async def create_profile(requests:Request):
     response = await requests.json()
+    print(response)
     name = response['fields']['summary']
     tag = 'TO DO'
     email = response['user']['email']
