@@ -18,8 +18,8 @@ async def create_profile(requests:Request):
 async def move_to_warming(requests:Request):
     response = await requests.json()
     print(response)
-    tag = response['issue']['fields']['status']['name']
-    name = response['issue']['fields']['summary']
+    tag = response['fields']['status']['name']
+    name = response['fields']['summary']
     print(tag,name)
     data = Profile.search_uuid(name)
     uuid = data['data'][0]['uuid']
@@ -29,8 +29,9 @@ async def move_to_warming(requests:Request):
 @router.post('/move_to_register')
 async def move_to_warming(requests:Request):
     response = await requests.json()
+    print(response)
     tag = 'registr'
-    name = response['issue']['fields']['summary']
+    name = response['fields']['summary']
     data = Profile.search_uuid(name)
     uuid = data['data'][0]['uuid']
     response = Profile.update_profile(uuid,tag)
