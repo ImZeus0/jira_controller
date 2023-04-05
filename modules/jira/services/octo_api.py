@@ -63,22 +63,26 @@ class Profile:
         BASE_CONFIG_PROFILE['title'] = name
         BASE_CONFIG_PROFILE['tags'] = [tag]
         if proxy is not None:
-            proxy_config = {'type': 'socks5'}
+            proxy_config = {}
             connect_info = proxy.split(':')
             if len(connect_info) == 2:
+                proxy_config['type'] = 'socks5'
                 proxy_config['host'] = connect_info[0]
                 proxy_config['port'] = connect_info[1]
             elif len(connect_info) == 4:
+                proxy_config['type'] = 'socks5'
                 proxy_config['host'] = connect_info[0]
                 proxy_config['port'] = connect_info[1]
                 proxy_config['login'] = connect_info[2]
                 proxy_config['password'] = connect_info[3]
             else :
-                proxy_config['uuid'] = proxy
+                uuid = cls.get_proxy(proxy)
+                proxy_config['uuid'] = uuid
             BASE_CONFIG_PROFILE['proxy'] = proxy_config
         data = json.dumps(BASE_CONFIG_PROFILE)
         response = requests.post(url=url, data=data, headers=HEADERS)
         response = response.json()
+        print(response)
         if response.get('success'):
             return response['data']['uuid']
         else:
@@ -116,5 +120,13 @@ class Profile:
         response = requests.get(url, headers=HEADERS)
         return response.json()
 
+    @classmethod
+    def get_proxy(cls,name):
+        url = BASE_URL + '/proxies'
+        response = requests.get(url, headers=HEADERS)
+        proxies = response.json()['data']
+        for proxy in proxies:
+            if proxy['title'] == name:
+                return proxy['uuid']
 
 
