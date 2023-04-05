@@ -19,6 +19,7 @@ async def move_to_warming(requests:Request):
     response = await requests.json()
     tag = response['issue']['fields']['status']['name']
     name = response['issue']['fields']['summary']
+    print(tag,name)
     data = Profile.search_uuid(name)
     uuid = data['data'][0]['uuid']
     response = Profile.update_profile(uuid,tag)
