@@ -16,4 +16,4 @@ async def root(request: Request):
 
 if __name__ == '__main__':
     cwd = pathlib.Path(__file__).parent.resolve()
-    uvicorn.run('main:app', port=6000, host='0.0.0.0', reload=True)
+    uvicorn.run('main:app', port=6666, host='127.0.0.1', reload=True)

@@ -23,3 +23,12 @@ async def move_to_warming(requests:Request):
     response = Profile.update_profile(uuid,tag)
     print(response)
 
+@router.post('/move_to_register')
+async def move_to_warming(requests:Request):
+    response = await requests.json()
+    tag = 'registr'
+    name = response['fields']['summary']
+    data = Profile.search_uuid(name)
+    uuid = data['data'][0]['uuid']
+    response = Profile.update_profile(uuid,tag)
+    print(response)
