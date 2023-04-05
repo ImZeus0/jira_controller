@@ -10,7 +10,7 @@ async def create_profile(requests:Request):
     print(response)
     name = response['issue']['fields']['summary']
     tag = 'TO DO'
-    email = response['user']['email']
+    email = response['user']['emailAddress']
     response = Profile.create(name,tag)
     print(response)
 
