@@ -17,6 +17,7 @@ async def create_profile(requests:Request):
 @router.post('/move_to_warming')
 async def move_to_warming(requests:Request):
     response = await requests.json()
+    print(response)
     tag = response['issue']['fields']['status']['name']
     name = response['issue']['fields']['summary']
     print(tag,name)
