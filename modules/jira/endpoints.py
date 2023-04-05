@@ -8,7 +8,7 @@ router = APIRouter()
 async def create_profile(requests:Request):
     response = await requests.json()
     print(response)
-    name = response['fields']['summary']
+    name = response['issue']['fields']['summary']
     tag = 'TO DO'
     email = response['user']['email']
     response = Profile.create(name,tag)
@@ -17,8 +17,8 @@ async def create_profile(requests:Request):
 @router.post('/move_to_warming')
 async def move_to_warming(requests:Request):
     response = await requests.json()
-    tag = response['filelds']['status']['name']
-    name = response['fields']['summary']
+    tag = response['issue']['fields']['status']['name']
+    name = response['issue']['fields']['summary']
     data = Profile.search_uuid(name)
     uuid = data['data'][0]['uuid']
     response = Profile.update_profile(uuid,tag)
@@ -28,7 +28,7 @@ async def move_to_warming(requests:Request):
 async def move_to_warming(requests:Request):
     response = await requests.json()
     tag = 'registr'
-    name = response['fields']['summary']
+    name = response['issue']['fields']['summary']
     data = Profile.search_uuid(name)
     uuid = data['data'][0]['uuid']
     response = Profile.update_profile(uuid,tag)
