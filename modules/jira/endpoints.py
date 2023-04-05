@@ -9,7 +9,7 @@ async def create_profile(requests:Request):
     response = await requests.json()
     print(response)
     name = response['issue']['fields']['summary']
-    tag = 'TO DO'
+    tag = 'to do'
     email = response['user']['emailAddress']
     response = Profile.create(name,tag)
     print(response)
