@@ -73,6 +73,8 @@ class Profile:
                 proxy_config['port'] = connect_info[1]
                 proxy_config['login'] = connect_info[2]
                 proxy_config['password'] = connect_info[3]
+            else :
+                proxy_config['uuid'] = proxy
             BASE_CONFIG_PROFILE['proxy'] = proxy_config
         data = json.dumps(BASE_CONFIG_PROFILE)
         response = requests.post(url=url, data=data, headers=HEADERS)
@@ -113,7 +115,6 @@ class Profile:
         url = BASE_URL + '/tags'
         response = requests.get(url, headers=HEADERS)
         return response.json()
-
 
 
 
