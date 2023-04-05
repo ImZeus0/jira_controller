@@ -12,9 +12,6 @@ BASE_CONFIG_PROFILE = {
             "tags": [
                 "to_do"
             ],
-            #"proxy": {
-            #    "type":"socks5"
-            #},
             "storage_options": {
                 "cookies": True,
                 "passwords": True,
@@ -61,10 +58,22 @@ ERROR_FAILED_GET_IP = 4
 
 class Profile:
     @classmethod
-    def create(cls,name,tag):
+    def create(cls,name,tag,proxy=None):
         url = BASE_URL + '/profiles'
         BASE_CONFIG_PROFILE['title'] = name
         BASE_CONFIG_PROFILE['tags'] = [tag]
+        if proxy is not None:
+            proxy_config = {'type': 'socks5'}
+            connect_info = proxy.split(':')
+            if len(connect_info) == 2:
+                proxy_config['host'] = connect_info[0]
+                proxy_config['port'] = connect_info[1]
+            elif len(connect_info) == 4:
+                proxy_config['host'] = connect_info[0]
+                proxy_config['port'] = connect_info[1]
+                proxy_config['login'] = connect_info[2]
+                proxy_config['password'] = connect_info[3]
+            BASE_CONFIG_PROFILE['proxy'] = proxy_config
         data = json.dumps(BASE_CONFIG_PROFILE)
         response = requests.post(url=url, data=data, headers=HEADERS)
         response = response.json()
