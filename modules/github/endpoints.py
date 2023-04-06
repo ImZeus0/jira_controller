@@ -1,5 +1,5 @@
 from fastapi import  APIRouter ,Request
-from service.create import create
+from modules.github.service.create import create_repo
 router = APIRouter()
 
 @router.post('/create_repo')
@@ -8,6 +8,6 @@ async def create_repo(request:Request):
     namedValue = request['fields']['issuetype']['namedValue']
     if namedValue == 'Story':
         name = request['key']
-    response = create(name)
+    response = create_repo(name)
     print(response)
     return response
