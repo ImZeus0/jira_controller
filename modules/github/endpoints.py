@@ -3,7 +3,7 @@ from modules.github.service.create import create_repo
 router = APIRouter()
 
 @router.post('/create_repo')
-async def create_repo(request:Request):
+async def create_repo_mentod(request:Request):
     request = await request.json()
     namedValue = request['fields']['issuetype']['namedValue']
     summary = request['fields']['summary']
