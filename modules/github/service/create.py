@@ -2,7 +2,7 @@ import requests
 from core.config import get_settings
 
 
-def create(name):
+def create_repo(name):
     github_token = get_settings().git_hub_token
     github_api_url = 'https://api.github.com/user/repos'
 
