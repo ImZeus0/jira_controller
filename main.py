@@ -1,12 +1,15 @@
 import os
 import pathlib
 from modules.jira.endpoints import router
+from modules.github.endpoints import router as git_router
 import uvicorn as uvicorn
 from fastapi import FastAPI, Request
 
 app = FastAPI()
 
 app.include_router(router, prefix='/jira')
+app.include_router(git_router, prefix='/git')
+
 
 
 @app.post('/')
