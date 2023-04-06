@@ -5,10 +5,12 @@ import os
 class Settings(BaseSettings):
     octo_ip:str
     token_octo:str
+    git_hub_token:str
 
 
     class Config:
-        env_file = os.path.join(os.getcwd(),'core','config.env')
+        #env_file = os.path.join(os.getcwd(),'core','config.env')
+        env_file = '/home/zeus/PycharmProjects/jira_controller/core/config.env'
         env_file_encoding = 'utf-8'
 
 
