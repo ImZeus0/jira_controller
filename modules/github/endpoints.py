@@ -4,10 +4,12 @@ router = APIRouter()
 
 @router.post('/create_repo')
 async def create_repo(request:Request):
-    request = request.json()
+    request = await request.json()
     namedValue = request['fields']['issuetype']['namedValue']
-    if namedValue == 'Story':
+    summary = request['fields']['summary']
+    print(namedValue,summary)
+    if namedValue == 'Sub-task' and summary == 'app':
         name = request['key']
-    response = create_repo(name)
-    print(response)
-    return response
+        response = create_repo(name)
+        print(response)
+        return response
