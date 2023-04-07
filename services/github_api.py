@@ -30,7 +30,7 @@ def create_repo(name):
 def add_file_action(repo):
     path = '.github/workflows/test_app.yml'
     url = f"https://api.github.com/repos/{get_settings().git_hub_user}/{repo}/contents/{path}"
-    content = base64.b64encode(open(os.getcwd()+'/example_action.txt','rb').read()).decode()
+    content = base64.b64encode(open(os.getcwd()+'/services/example_action.txt','rb').read()).decode()
     print(content)
     params = {
         "message": "Add test_app.yml",
