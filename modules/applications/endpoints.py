@@ -1,5 +1,5 @@
 from fastapi import  APIRouter ,Request
-from modules.github.service.api import create_repo
+from services.github_api import create_repo,add_file_action
 router = APIRouter()
 
 @router.post('/create_repo')
@@ -10,5 +10,10 @@ async def create_repo_mentod(request:Request):
     print(namedValue,summary)
     if namedValue == 'Sub-task' and summary == 'app':
         name = request['key']
-        response = create_repo(name)
-        print(response)
+        create_repo(name)
+        add_file_action(name)
+@router.post('/finish_action')
+async def finish_action(request:Request):
+    request = await request.json()
+    print(request)
+

@@ -1,0 +1,15 @@
+name: HTTP GET request example
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+        my_input:
+          description: 'My input'
+          required: true
+jobs:
+  http_request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send HTTP GET request
+        run: |
+          curl https://8.8.8.8

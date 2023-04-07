@@ -1,6 +1,6 @@
 from fastapi import  APIRouter ,Request
 
-from modules.jira.services.octo_api import Profile
+from services.octo_api import Profile
 
 router = APIRouter()
 
