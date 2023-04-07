@@ -30,7 +30,7 @@ def create_repo(name):
 def add_file_action(repo):
     path = '.github/workflows/test_app.yml'
     url = f"https://api.github.com/repos/{get_settings().git_hub_user}/{repo}/contents/{path}"
-    content = base64.b64encode(open('example_action.txt','rb').read()).decode()
+    content = base64.b64encode(open('service/example_action.txt','rb').read()).decode()
     print(content)
     params = {
         "message": "Add test_app.yml",
@@ -46,7 +46,7 @@ def add_webhook(repo):
               "name": "web",
               "active": True,
               "events": [
-                "push"
+                "workflow_run_completed"
               ],
               "config": {
                 "url": "https://jira.adstools.net/applications/finish_action",

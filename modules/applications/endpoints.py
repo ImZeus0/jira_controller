@@ -12,8 +12,14 @@ async def create_repo_mentod(request:Request):
         name = request['key']
         create_repo(name)
         add_file_action(name)
+
+@router.post('/move_to_ready')
+async def move_to_ready(request:Request):
+    pass
 @router.post('/finish_action')
 async def finish_action(request:Request):
     request = await request.json()
-    print(request)
+    if request['workflow_run']['status'] == 'completed':
+        issue_key = request['workflow_run']['repository']['name']
+
 
