@@ -1,5 +1,5 @@
 from fastapi import  APIRouter ,Request
-from modules.github.service.create import create_repo
+from modules.github.service.api import create_repo
 router = APIRouter()
 
 @router.post('/create_repo')
