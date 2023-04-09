@@ -90,4 +90,9 @@ def show_result_action(repo,run_id):
     else:
         print(response_run)
 
+def show_workflow(repo):
+    url = f'https://api.github.com/repos/{get_settings().git_hub_user}/{repo}/actions/workflows'
+    response = requests.get(url,headers=HEADERS).json()
+    return response['workflows'][0]
+
 

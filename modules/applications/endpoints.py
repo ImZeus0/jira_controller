@@ -1,7 +1,7 @@
 import os
 
 from fastapi import  APIRouter ,Request
-from services.github_api import create_repo,add_file_action
+from services.github_api import create_repo,add_file_action,show_workflow,run_action
 from core.config import get_settings
 router = APIRouter()
 
@@ -21,14 +21,16 @@ async def create_repo_mentod(request:Request):
 @router.post('/move_to_qa')
 async def move_to_ready(request:Request):
     request = await request.json()
-    print(request)
     key = request['key']
     clone_url = f'https://{get_settings().git_hub_token}@github.com/{get_settings().git_hub_user}/{key}.git'
     os.system(f'cd repos && git clone {clone_url}')
-    print(key)
+    workflow_id =  show_workflow(key)
+    run_action(key,workflow_id)
+
 @router.post('/finish_action')
 async def finish_action(request:Request):
     request = await request.json()
+    print(request)
     if request['workflow_run']['status'] == 'completed':
         issue_key = request['workflow_run']['repository']['name']
 
