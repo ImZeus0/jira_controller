@@ -1,5 +1,8 @@
+import os
+
 from fastapi import  APIRouter ,Request
 from services.github_api import create_repo,add_file_action
+from core.config import get_settings
 router = APIRouter()
 
 @router.post('/create_repo')
@@ -14,9 +17,12 @@ async def create_repo_mentod(request:Request):
         create_repo(name)
         add_file_action(name)
 
-@router.post('/move_to_ready')
+@router.post('/move_to_qa')
 async def move_to_ready(request:Request):
-    pass
+    key = request['key']
+    clone_url = f'https://{get_settings().git_hub_user}@github.com/{get_settings().git_hub_user}/{key}.git'
+    os.system(f'cd repos && git clone {clone_url}')
+    print(key)
 @router.post('/finish_action')
 async def finish_action(request:Request):
     request = await request.json()
