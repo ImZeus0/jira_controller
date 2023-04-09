@@ -5,6 +5,7 @@ router = APIRouter()
 @router.post('/create_repo')
 async def create_repo_mentod(request:Request):
     request = await request.json()
+    print(request)
     namedValue = request['fields']['issuetype']['namedValue']
     summary = request['fields']['summary']
     print(namedValue,summary)

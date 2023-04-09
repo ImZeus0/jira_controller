@@ -10,7 +10,6 @@ HEADERS = {
         'X-GitHub-Api-Version': '2022-11-28'
     }
 def create_repo(name):
-    github_token = get_settings().git_hub_token
     github_api_url = 'https://api.github.com/user/repos'
     data = {
         "name": name,
@@ -90,7 +89,5 @@ def show_result_action(repo,run_id):
             writer.write(response_log)
     else:
         print(response_run)
-
-
 
 
