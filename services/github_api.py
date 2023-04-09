@@ -108,5 +108,3 @@ def show_workflow(repo):
     url = f'https://api.github.com/repos/{get_settings().git_hub_user}/{repo}/actions/workflows'
     response = requests.get(url, headers=HEADERS).json()
     return response['workflows'][0]
-
-add_webhook('AP-86')
