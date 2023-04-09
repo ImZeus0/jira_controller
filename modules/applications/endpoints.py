@@ -25,6 +25,7 @@ async def move_to_ready(request:Request):
     clone_url = f'https://{get_settings().git_hub_token}@github.com/{get_settings().git_hub_user}/{key}.git'
     os.system(f'cd repos && git clone {clone_url}')
     workflow_id =  show_workflow(key)
+    print('workflow_id',workflow_id)
     run_action(key,workflow_id)
 
 @router.post('/finish_action')
