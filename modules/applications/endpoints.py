@@ -9,7 +9,7 @@ router = APIRouter()
 async def create_repo_mentod(request:Request):
     request = await request.json()
     print(request)
-    email = request['fields']['assignee']['emailAddress']
+    #email = request['fields']['assignee']['emailAddress']
     namedValue = request['fields']['issuetype']['namedValue']
     summary = request['fields']['summary']
     print(namedValue,summary)
@@ -32,7 +32,7 @@ async def move_to_ready(request:Request):
 async def finish_action(request:Request):
     request = await request.json()
     print(request)
-    if request['workflow_run']['status'] == 'completed':
-        issue_key = request['workflow_run']['repository']['name']
+    #if request['workflow_run']['status'] == 'completed':
+    #    issue_key = request['workflow_run']['repository']['name']
 
 
