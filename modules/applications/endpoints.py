@@ -1,7 +1,7 @@
 import os
 
 from fastapi import  APIRouter ,Request
-from services.github_api import create_repo,add_file_action,show_workflow,run_action,add_webhook
+from services.github_api import create_repo, add_file_action, show_workflow, run_action, add_webhook, show_result_action
 from core.config import get_settings
 router = APIRouter()
 
@@ -35,6 +35,9 @@ async def finish_action(request:Request):
     print(request)
     if request['workflow_run']['status'] == 'completed':
         issue_key = request['workflow_run']['repository']['name']
+        run_id = request['workflow_run']['if']
+        print('run_id',run_id)
+        show_result_action(issue_key,run_id)
         os.system(f'rm -r repos/{issue_key}')
 
 
