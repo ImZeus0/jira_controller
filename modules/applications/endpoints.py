@@ -11,7 +11,6 @@ dict_users = {'zeus1zeus101@gmail.com':'ImZeus00'}
 async def create_repo_mentod(request:Request):
     request = await request.json()
     namedValue = request['fields']['issuetype']['namedValue']
-    summary = request['fields']['summary']
     if namedValue == 'Development':
         name = request['key']
         create_repo(name)
