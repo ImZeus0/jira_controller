@@ -13,7 +13,7 @@ async def create_repo_mentod(request:Request):
     namedValue = request['fields']['issuetype']['namedValue']
     summary = request['fields']['summary']
     print(namedValue,summary)
-    if namedValue == 'Sub-task' and summary == 'app':
+    if namedValue == 'Development':
         name = request['key']
         create_repo(name)
         add_file_action(name)
