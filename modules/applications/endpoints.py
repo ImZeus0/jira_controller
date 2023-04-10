@@ -53,7 +53,6 @@ async def finish_action(request:Request):
             run_id = request['workflow_run']['id']
             show_result_action(log_url, run_id)
             add_file_to_issue(issue_key, run_id)
-            move_to_qaqc(issue_key)
             os.system(f'rm -r repos/{issue_key}')
     return 1
 
