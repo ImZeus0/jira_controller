@@ -33,12 +33,16 @@ async def move_to_ready(request:Request):
 async def finish_action(request:Request):
     request = await request.json()
     print(request)
-    if request['workflow_run']['status'] == 'completed':
-        issue_key = request['workflow_run']['repository']['name']
-        run_id = request['workflow_run']['if']
-        print('run_id',run_id)
-        show_result_action(issue_key,run_id)
-        os.system(f'rm -r repos/{issue_key}')
+    if request.get('workflow_run'):
+        if request['workflow_run']['status'] == 'completed':
+            issue_key = request['workflow_run']['repository']['name']
+            run_id = request['workflow_run']['id']
+            print('run_id',run_id)
+            show_result_action(issue_key,run_id)
+            os.system(f'rm -r repos/{issue_key}')
+    else:
+        print('[-] pass')
+    return 1
 
 
 
