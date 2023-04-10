@@ -1,7 +1,7 @@
 import os
 
 from fastapi import  APIRouter ,Request
-from services.github_api import create_repo,add_file_action,show_workflow,run_action
+from services.github_api import create_repo,add_file_action,show_workflow,run_action,add_webhook
 from core.config import get_settings
 router = APIRouter()
 
@@ -17,6 +17,7 @@ async def create_repo_mentod(request:Request):
         name = request['key']
         create_repo(name)
         add_file_action(name)
+        add_webhook(name)
 
 @router.post('/move_to_qa')
 async def move_to_ready(request:Request):
