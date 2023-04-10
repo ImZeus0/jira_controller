@@ -10,8 +10,6 @@ dict_users = {'zeus1zeus101@gmail.com':'ImZeus00'}
 @router.post('/create_repo')
 async def create_repo_mentod(request:Request):
     request = await request.json()
-    email = request['fields']['assignee']['emailAddress']
-    print('email',email)
     namedValue = request['fields']['issuetype']['namedValue']
     summary = request['fields']['summary']
     if namedValue == 'Development':
@@ -19,7 +17,10 @@ async def create_repo_mentod(request:Request):
         create_repo(name)
         add_file_action(name,'test')
         add_file_action(name,'publishing')
-        send_collaborators(name,dict_users[email])
+        email = request['fields']['assignee']['emailAddress']
+        print('email', email)
+        if email is not None:
+            send_collaborators(name,dict_users[email])
 
 @router.post('/move_to_qa')
 async def move_to_ready(request:Request):
