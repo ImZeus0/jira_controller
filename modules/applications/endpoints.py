@@ -17,7 +17,6 @@ async def create_repo_mentod(request:Request):
         name = request['key']
         create_repo(name)
         add_file_action(name)
-        add_webhook(name)
 
 @router.post('/move_to_qa')
 async def move_to_ready(request:Request):
@@ -27,13 +26,16 @@ async def move_to_ready(request:Request):
     os.system(f'cd repos && git clone {clone_url}')
     workflow =  show_workflow(key)
     print('workflow_id',workflow['id'])
+    add_webhook(key)
     run_action(key,workflow['id'])
 
 @router.post('/finish_action')
 async def finish_action(request:Request):
     request = await request.json()
     print(request)
-    #if request['workflow_run']['status'] == 'completed':
-    #    issue_key = request['workflow_run']['repository']['name']
+    if request['workflow_run']['status'] == 'completed':
+        issue_key = request['workflow_run']['repository']['name']
+        os.system(f'rm -r repos/{issue_key}')
+
 
 
