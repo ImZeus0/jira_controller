@@ -1,6 +1,7 @@
 import os
 
 from fastapi import  APIRouter ,Request
+from services.jira_api import add_file_to_issue
 from services.github_api import create_repo, add_file_action, show_workflow, run_action, add_webhook, show_result_action
 from core.config import get_settings
 router = APIRouter()
@@ -36,9 +37,11 @@ async def finish_action(request:Request):
     if request.get('workflow_run'):
         if request['workflow_run']['status'] == 'completed':
             issue_key = request['workflow_run']['repository']['name']
+            log_url = ['workflow_run']['logs_url']
             run_id = request['workflow_run']['id']
             print('run_id',run_id)
-            show_result_action(issue_key,run_id)
+            show_result_action(log_url,run_id)
+            add_file_to_issue(issue_key,run_id)
             os.system(f'rm -r repos/{issue_key}')
     else:
         print('[-] pass')

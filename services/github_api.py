@@ -87,21 +87,16 @@ def run_action(repo, workflow_id):
     print(response.status_code, response.text)
 
 
-def show_result_action(repo, run_id):
-    url = f'https://api.github.com/repos/{get_settings().git_hub_user}/{repo}/actions/runs/{run_id}'
-    response_run = requests.get(url, headers=HEADERS).json()
-    if response_run.get('conclusion') == 'success':
-        headers = {
-            'Authorization': f'Bearer {get_settings().git_hub_token}',
-            # 'Accept': 'application/vnd.github.v3+json',
-            'accept-encoding': 'identify',
-            'X-GitHub-Api-Version': '2022-11-28'
+def show_result_action(log_url,id_run):
+    headers = {
+        'Authorization': f'Bearer {get_settings().git_hub_token}',
+        'accept-encoding': 'identify',
+        'X-GitHub-Api-Version': '2022-11-28'
         }
-        response_log = requests.get(response_run['logs_url'], headers=headers).content
-        with open('111.zip', 'wb') as writer:
-            writer.write(response_log)
-    else:
-        print(response_run)
+    response_log = requests.get(log_url, headers=headers).content
+    with open(f'{id_run}.zip', 'wb') as writer:
+        writer.write(response_log)
+    print('create file')
 
 
 def show_workflow(repo):
