@@ -12,6 +12,3 @@ def add_file_to_issue(issue_key,file_name):
 
 def move_to_qaqc(issue_key):
     jira_connection.transition_issue(issue_key, "QA|QC")
-
-#print(jira_connection.auth)
-move_to_qaqc('AP-113')
