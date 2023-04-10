@@ -1,4 +1,4 @@
-name: HTTP GET request example
+name: test
 on:
   push:
   workflow_dispatch:

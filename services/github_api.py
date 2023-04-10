@@ -30,12 +30,12 @@ def create_repo(name):
         return None
 
 
-def add_file_action(repo):
-    path = '.github/workflows/test_app.yml'
+def add_file_action(repo,file_name):
+    path = f'.github/workflows/{file_name}.yml'
     url = f"https://api.github.com/repos/{get_settings().git_hub_user}/{repo}/contents/{path}"
-    content = base64.b64encode(open(os.getcwd() + '/services/example_action.txt', 'rb').read()).decode()
+    content = base64.b64encode(open(os.getcwd() + f'/services/{file_name}.txt', 'rb').read()).decode()
     params = {
-        "message": "Add test_app.yml",
+        "message": f"Add {file_name}.yml",
         "content": content,
         "path": path
     }
@@ -98,7 +98,8 @@ def show_result_action(log_url,id_run):
     print('create file')
 
 
-def show_workflow(repo):
+def show_workflows(repo):
     url = f'https://api.github.com/repos/{get_settings().git_hub_user}/{repo}/actions/workflows'
     response = requests.get(url, headers=HEADERS).json()
-    return response['workflows'][0]
+    return response['workflows']
+
