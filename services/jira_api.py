@@ -3,7 +3,7 @@ from jira import JIRA
 from core.config import get_settings
 
 jira_options = {'server': 'https://lvl99-betapps.atlassian.net/'}
-jira_connection = JIRA(options=jira_options, basic_auth=(get_settings().jira_email, get_settings().jira_email))
+jira_connection = JIRA(options=jira_options, basic_auth=(get_settings().jira_email, get_settings().jira_token))
 
 def add_file_to_issue(issue_key,file_name):
     current_issue = jira_connection.issue(issue_key)
@@ -11,5 +11,7 @@ def add_file_to_issue(issue_key,file_name):
         jira_connection.add_attachment(issue=current_issue, attachment=f,)
 
 def move_to_qaqc(issue_key):
-    jira_connection.transition_issue(issue_key, "QA/QC")
+    jira_connection.transition_issue(issue_key, "QA|QC")
 
+#print(jira_connection.auth)
+move_to_qaqc('AP-113')

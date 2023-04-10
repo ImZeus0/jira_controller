@@ -22,6 +22,7 @@ async def create_repo_mentod(request:Request):
 @router.post('/move_to_qa')
 async def move_to_ready(request:Request):
     request = await request.json()
+    print(request)
     key = request['key']
     clone_url = f'https://{get_settings().git_hub_token}@github.com/{get_settings().git_hub_user}/{key}.git'
     os.system(f'cd repos && git clone {clone_url}')
