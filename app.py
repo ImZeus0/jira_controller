@@ -1,4 +1,4 @@
-from loader import bot, storage , loop
+from bot.loader import bot, storage , loop
 
 
 async def on_shutdown(dp):
@@ -8,5 +8,5 @@ async def on_shutdown(dp):
 
 if __name__ == '__main__':
     from aiogram import executor
-    from handlers import dp
+    from bot.handlers.start_handlers import dp
     executor.start_polling(dp,loop=loop,on_shutdown=on_shutdown)

@@ -1,4 +1,4 @@
-from bot.loader import bot, dp
+from bot.loader import dp
 from aiogram.types import Message
 from aiogram.dispatcher import FSMContext
 from aiogram.types.callback_query import CallbackQuery
