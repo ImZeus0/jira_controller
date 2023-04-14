@@ -12,8 +12,8 @@ class Settings(BaseSettings):
 
 
     class Config:
-        env_file = os.path.join(os.getcwd(),'core','config.env')
-        #env_file = '/home/zeus/PycharmProjects/jira_controller/core/config.env'
+        #env_file = os.path.join(os.getcwd(),'core','config.env')
+        env_file = '/home/zeus/PycharmProjects/jira_controller/core/config.env'
         env_file_encoding = 'utf-8'
 
 
